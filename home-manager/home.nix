@@ -6,7 +6,9 @@
   pkgs,
   ...
 }: {
-  imports = [ ];
+  imports = [
+    ./games.nix
+  ];
 
   # TODO: Set your username
   home = {
@@ -17,6 +19,8 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+    element-desktop
+
     # creative
     godot
     blender
@@ -24,6 +28,7 @@
     krita
     audacity
     gimp
+    openutau
 
     # media
     zathura
@@ -31,17 +36,29 @@
     vimiv-qt
     libreoffice-fresh
     mpc ncmpcpp rmpc # mpd stuff (new to it)
+    ffmpeg
+    yt-dlp
+    ani-cli
 
-    # cool cli shit (ordered by usefulness)
-    yt-dlp ani-cli # entertainment
     python313Packages.ipython
     uv
-    cloc
-    libqalculate
+    cloc # count lines of code
+    nushell
+    tree
+    file
+
+    libqalculate # provides qalc
+    khal # calendar
+
+    fastfetch
     microfetch
+
     eza
-    cowsay
     cava
+
+    # fun stuff
+    cowsay
+    # sl figlet toilet lolcat
 
     # other
     pavucontrol
@@ -50,13 +67,20 @@
     dunst
     wireguard-tools
     protonvpn-gui
+    keepassxc
 
-    # # games
-    prismlauncher
-    luanti # (formerly minetest)
-    # factorio-demo
-    # veloren mindustry supertuxkart supertux (from git) the-powder-toy (little 2d sandbox)
-    # ? 0ad, hedgewars, warzone-2100, freeciv
+    # e
+    sherlock
+    nmap
+
+    # breeze
+    kdePackages.breeze
+    kdePackages.breeze-gtk
+    kdePackages.breeze-icons
+
+    # # to check
+    # burpsuite wireshark john hashcat ffuf
+    # nnn
   ];
 
   # Enable home-manager and git
@@ -80,6 +104,22 @@
             name "My PipeWire Output"
         }
     '';
+  };
+
+  programs.neovim = {
+    enable = true;
+    extraPackages = with pkgs; [
+      basedpyright
+      clang-tools # clangd
+      lua-language-server
+      rust-analyzer-unwrapped
+      stylua
+      shfmt
+    ];
+  };
+
+  qt = {
+    enable = true;
   };
 
   # Nicely reload system units when changing configs

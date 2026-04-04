@@ -7,8 +7,6 @@
     ./hardware-configuration.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.xserver.enable = false;
   # services.desktopManager.plasma6.enable = true;
@@ -22,9 +20,11 @@
     # packages = with pkgs; [ ];
   };
 
-  programs.hyprland.enable = true;
+  programs.nix-ld.enable = true;
 
   programs.firefox.enable = true;
+
+  programs.hyprland.enable = true;
 
   # == NeoVim ==
   programs.neovim = {
@@ -39,21 +39,19 @@
   };
 
   programs.steam.enable = true;
-
-  programs.obs-studio = {
-    enable = true;
-
-    # optional Nvidia hardware acceleration
-    package = (
-      pkgs.obs-studio.override {
-        cudaSupport = true;
-      }
-    );
-  };
+  programs.obs-studio.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    neovim
+    htop btop
+    git
+    wget
+    gcc
+    zip unzip
+    fzf
+    ripgrep
 
     # hypr
     foot
@@ -62,6 +60,7 @@
     grim slurp
     hyprpicker
     hyprpaper
+    hyprlock
     networkmanagerapplet
     adwaita-icon-theme
     brightnessctl
@@ -71,22 +70,6 @@
 
     # nvim
     wl-clipboard
-    basedpyright
-    clang-tools # clangd
-    lua-language-server
-    rust-analyzer-unwrapped
-    stylua
-    shfmt
-
-    # other
-    htop btop
-    vim
-    git
-    wget
-    gcc
-    zip unzip
-    fzf
-    ripgrep
 
     hyprsunset # gammastep
     tmux
@@ -172,21 +155,22 @@
   time.timeZone = "Europe/Budapest";
 
   # Select internationalisation properties.
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "hu_HU.UTF-8/UTF-8"
+  ];
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "hu_HU.UTF-8";
-    LC_IDENTIFICATION = "hu_HU.UTF-8";
-    LC_MEASUREMENT = "hu_HU.UTF-8";
-    LC_MONETARY = "hu_HU.UTF-8";
-    LC_NAME = "hu_HU.UTF-8";
-    LC_PAPER = "hu_HU.UTF-8";
-    LC_TELEPHONE = "hu_HU.UTF-8";
-    LC_TIME = "hu_HU.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   i18n.inputMethod = {
     type = "fcitx5";
@@ -216,21 +200,34 @@
     ];
   };
   hardware.bluetooth.enable = true;
+ 
+  # graphics: nvidia / intel
 
-  # nvidia stuff
   hardware.graphics.enable = true;
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+
+  # # intel
+  # hardware.graphics.extraPackages = with pkgs; [
+  #   intel-media-driver
+  #   vpl-gpu-rt
+  #   # intel-compute-runtime
+  #   # intel-media-sdk
+  # ];
+  # environment.sessionVariables = {
+  #   LIBVA_DRIVER_NAME = "iHD";
+  # };
+  # services.xserver.videoDrivers = [ "modesetting" ];
+
+  # nvidia
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     # package = config.boot.kernelPackages.nvidiaPackages.beta;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
     nvidiaSettings = true;
-
     # >= Turing
     open = false;
-    powerManagement.finegrained = false;
   };
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -241,6 +238,15 @@
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
+  };
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 14d";
   };
 
   # This value determines the NixOS release from which the default

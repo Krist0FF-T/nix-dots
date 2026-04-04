@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     # a Minecraft launcher (MultiMC fork)
@@ -13,7 +13,7 @@
     # mindustry
 
     # veloren
-    supertuxkart
+    superTuxKart
     superTux
     the-powder-toy # (little 2d sandbox)
 
