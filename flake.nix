@@ -14,6 +14,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -25,7 +26,20 @@
       gyik-hp = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          {
+            nixpkgs.overlays = [(final: _prev: {
+              # hyprland = nixpkgs-unstable.
+              unstable = import nixpkgs-unstable {
+                system = final.system;
+              };
+            })];
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+          ./nixos/configuration.nix
+        ];
       };
     };
 

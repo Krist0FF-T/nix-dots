@@ -24,13 +24,17 @@
 
   programs.firefox.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.unstable.hyprland;
+  };
 
   # == NeoVim ==
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     withPython3 = true;
+    package = pkgs.unstable.neovim-unwrapped;
   };
 
   programs.thunar = {
@@ -60,11 +64,11 @@
     grim slurp
     hyprpicker
     hyprpaper
-    hyprlock
+    unstable.hyprlock
     networkmanagerapplet
     adwaita-icon-theme
     brightnessctl
-    matugen
+    unstable.matugen
     libnotify # for notify-send
     dunst
 
