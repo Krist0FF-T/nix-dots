@@ -151,6 +151,11 @@
     # firewall.enable = false;
   };
 
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Budapest";
 
