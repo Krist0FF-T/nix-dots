@@ -242,9 +242,9 @@
     open = false;
   };
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # 6.12: SLTS (2035)
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  # boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Bootloader.
   boot.loader = {
