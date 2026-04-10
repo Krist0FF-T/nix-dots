@@ -20,6 +20,7 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
     element-desktop
+    newsboat
 
     # creative
     godot
