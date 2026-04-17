@@ -252,6 +252,9 @@
     efi.canTouchEfiVariables = true;
   };
 
+  boot.kernelParams = [ "quiet" ];
+  boot.plymouth.enable = true;
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
