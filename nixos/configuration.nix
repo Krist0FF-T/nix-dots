@@ -94,7 +94,7 @@
         ${pkgs.tuigreet}/bin/tuigreet \
           --remember --time --asterisks \
           --greeting "Szia Lajos!" \
-          --cmd Hyprland
+          --cmd start-hyprland
       '';
     };
   };
