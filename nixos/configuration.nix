@@ -31,14 +31,6 @@
     package = pkgs.unstable.hyprland;
   };
 
-  # == NeoVim ==
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    withPython3 = true;
-    package = pkgs.unstable.neovim-unwrapped;
-  };
-
   programs.thunar = {
     enable = true;
     plugins = with pkgs.xfce; [ thunar-archive-plugin ];
@@ -50,7 +42,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
+    vim
     htop btop
     git
     wget

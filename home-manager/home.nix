@@ -109,6 +109,9 @@
 
   programs.neovim = {
     enable = true;
+    package = pkgs.unstable.neovim-unwrapped;
+    defaultEditor = true;
+    withPython3 = true;
     extraPackages = with pkgs; [
       basedpyright # python LS
       clang-tools # clangd
