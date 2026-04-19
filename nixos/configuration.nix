@@ -265,6 +265,11 @@
     open = false;
   };
 
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    HandleLidSwitch = "ignore";
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # 6.12: SLTS (2035)
   # boot.kernelPackages = pkgs.linuxPackages_6_12;

@@ -8,7 +8,7 @@ nix flake init -t github:misterio77/nix-starter-config#minimal
 ```
 
 # TODO
-- [ ] ignore power button and lid close
+- [x] ignore power button and lid close
 - [ ] easyeffects (audio)
 - [ ] rebuild script
 - [ ] fix fcitx gtk im warning
