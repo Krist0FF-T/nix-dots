@@ -231,7 +231,12 @@
 
   # List services that you want to enable:
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.PermitRootLogin = "no";
+  };
+
   services.printing = {
     enable = true; # CUPS
     drivers = with pkgs; [
