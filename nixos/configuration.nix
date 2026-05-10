@@ -1,3 +1,5 @@
+# TODO: write a rebuild script
+
 {
   config,
   pkgs,
@@ -13,6 +15,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
     initialPassword = "password";
     # packages = with pkgs; [ ];
+
+    # TODO: add authorized keys
   };
 
   home-manager.users.gyk = import ../home-manager/home.nix;
@@ -226,6 +230,7 @@
   };
 
   # to be able to type in different writing systems
+  # TODO: fix GTK IM warning
   i18n.inputMethod = {
     type = "fcitx5";
     enable = true;

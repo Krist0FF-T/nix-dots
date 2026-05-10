@@ -1,5 +1,8 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+
+# TODO: cliphist
+
 {
   lib,
   pkgs,
@@ -9,11 +12,8 @@
     ./games.nix
   ];
 
-  # TODO: Set your username
-  home = {
-    username = "gyk";
-    homeDirectory = "/home/gyk";
-  };
+  home.username = "gyk";
+  home.homeDirectory = "/home/gyk";
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
@@ -107,6 +107,10 @@
         }
     '';
   };
+
+  # TODO: nix-managed dotfiles?
+  # - though I'm not sure I want to rebuild on small config changes; symlinks work well
+  # - hot-reloading is nice in hyprland and quickshell
 
   programs.neovim = {
     enable = true;
