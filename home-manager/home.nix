@@ -95,6 +95,7 @@
       init.defaultBranch = "main";
     };
     lfs.enable = true;
+    settings.pull.rebase = true;
   };
 
   services.mpd = {
