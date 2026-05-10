@@ -315,6 +315,13 @@
     options = "--delete-older-than 14d";
   };
 
+  fileSystems."/mnt/E" = {
+    # TODO: by-uuid instead
+    device = "/dev/disk/by-label/ehdd";
+    fsType = "ext4";
+    options = [ "users" "nofail" "exec" ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
