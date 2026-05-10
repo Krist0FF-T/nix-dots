@@ -159,7 +159,7 @@
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
     # Open ports in the firewall.
-    # firewall.allowedTCPPorts = [ ... ];
+    firewall.allowedTCPPorts = [ 4321 8080 443 80 ];
     # firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
     # firewall.enable = false;
