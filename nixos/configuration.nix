@@ -22,7 +22,7 @@
     # TODO: add authorized keys
   };
 
-  home-manager.users.gyk = import ../home-manager/home.nix;
+  home-manager.users.gyk = import ../home;
 
   programs.nix-ld.enable = true;
 
