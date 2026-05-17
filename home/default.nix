@@ -55,6 +55,8 @@
     khal # calendar
     python313Packages.qrcode # qr code gen
     zellij # tmux alternative
+    tealdeer # tldr
+    wikiman
 
     fastfetch
     microfetch
