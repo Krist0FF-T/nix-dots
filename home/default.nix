@@ -19,6 +19,11 @@ in {
   home.username = "gyk";
   home.homeDirectory = "/home/gyk";
 
+  xdg.configFile = {
+    "nvim".source = ln "nvim";
+    "quickshell".source = ln "quickshell";
+  };
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
@@ -142,7 +147,6 @@ in {
       nil # nix ls
     ];
   };
-  xdg.configFile."nvim".source = ln "nvim";
 
   services.easyeffects.enable = true;
 
